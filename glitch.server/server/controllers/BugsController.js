@@ -2,26 +2,25 @@ import BaseController from '../utils/BaseController'
 import { bugsService } from '../services/BugsService'
 import { notesService } from '../services/NotesService'
 import { Auth0Provider } from '@bcwdev/auth0provider'
-import { logger } from '../utils/Logger'
+// import { logger } from '../utils/Logger'
 
 export class BugsController extends BaseController {
   constructor() {
     super('api/bugs')
     this.router
-      .use(Auth0Provider.getAuthorizedUserInfo)
+      .get('/:id/notes', this.getAllNotes)
       .get('', this.getAll)
       .get('/:id', this.getOne)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .delete('/:id', this.delete)
       .put('/:id', this.edit)
       .post('', this.create)
-      .get('/:id/notes', this.getAllNotes)
-      .get('/:id/notes/:id', this.getOneNote)
   }
 
   async getAll(req, res, next) {
     try {
       //
-      const data = await bugsService.getAll({ creatorId: req.userInfo.id })
+      const data = await bugsService.getAll()
       return res.send(data)
     } catch (error) {
       next(error)
@@ -40,7 +39,7 @@ export class BugsController extends BaseController {
 
   async delete(req, res, next) {
     try {
-      const data = await bugsService.delete({ _id: req.params.id, creatorId: req.userInfo.id })
+      const data = await bugsService.delete(req.params.id, req.userInfo.id)
       return res.send(data)
     } catch (error) {
       next(error)
@@ -68,24 +67,23 @@ export class BugsController extends BaseController {
     }
   }
 
-  async getAllLists(req, res, next) {
+  async getAllNotes(req, res, next) {
     try {
-      logger.log(req)
-      const data = await notesService.getAllLists(req.params.id)
-      logger.log(data)
+      // in the request in client side, in the parameters the id sent must be the bug id
+      const data = await notesService.getAllNotes(req.params.id)
       return res.send(data)
     } catch (error) {
       next(error)
     }
   }
 
-  async getOneList(req, res, next) {
-    try {
-      const data = await notesService.getOneList(req.query)
-      // data  is returning what is given back from teh service
-      return res.send(data)
-    } catch (error) {
-      next(error)
-    }
-  }
+  // async getOneNote(req, res, next) {
+  //   try {
+  //     const data = await notesService.getOneNote(req.query)
+  //     // data  is returning what is given back from the service
+  //     return res.send(data)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 }

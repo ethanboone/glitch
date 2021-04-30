@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
-const bug = new Schema({
+const Bug = new Schema({
   closed: { type: Boolean, required: true, default: false },
   description: { type: String, required: true },
   title: { type: String, required: true },
@@ -9,9 +9,11 @@ const bug = new Schema({
   creatorId: { type: String, ref: 'Account', required: true }
 }, { timestamps: true, toJSON: { virtuals: true } })
 
-bug.virtual('creator', {
+Bug.virtual('creator', {
   localField: 'creatorId',
   ref: 'Account',
   foreignField: '_id',
   justOne: true
 })
+
+export default Bug
