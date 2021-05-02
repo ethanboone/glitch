@@ -1,18 +1,20 @@
 <template>
-  <button class="btn btn-primary">
-    Bugs
-    <!-- {{ state.bugs }} -->
-  </button>
+  <tr>
+    <td>{{ bug.title }}</td>
+    <td>{{ bug.creator.name }}</td>
+    <td>{{ bug.closed }}</td>
+    <td>{{ bug.updatedAt }}</td>
+  </tr>
 </template>
 
 <script>
-import { reactive, computed } from 'vue'
-import { AppState } from '../AppState'
 import { bugsService } from '../services/BugsService'
 import { logger } from '../utils/Logger'
+import { reactive, computed } from 'vue'
+import { AppState } from '../AppState'
 
 export default {
-  name: 'Bug',
+  name: 'Bugs',
   props: {
     bug: {
       type: Object,
@@ -25,7 +27,7 @@ export default {
     })
     return {
       state,
-      async getBugs() {
+      async getAll() {
         try {
           await bugsService.getAll()
         } catch (error) {
@@ -36,3 +38,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+tr > td{
+  border:1px solid blue;
+}
+</style>

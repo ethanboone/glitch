@@ -1,7 +1,6 @@
-// import { AppState } from '../AppState'
+import { AppState } from '../AppState'
 import { api } from './AxiosService'
 import { logger } from '../utils/Logger'
-import { AppState } from '../AppState'
 
 class BugsService {
   async getAll() {
