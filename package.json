@@ -1,15 +1,13 @@
-
-  {
-    "name": "glitch",
-    "version": "1.0.0",
-    "scripts": {
-      "build": "npm run setup:client && npm run setup:server",
-      "setup:client": "cd glitch.client && npm i",
-      "setup:server": "cd glitch.server && npm i",
-      "start": "node glitch.server/index.js"
-    },
-    "engines": {
-      "node": "^14.15.4"
-    }
+{
+  "name": "glitch",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm run setup:client && npm run setup:server",
+    "setup:client": "cd glitch.client && npm i",
+    "setup:server": "cd glitch.server && npm i",
+    "start": "node glitch.server/index.js"
+  },
+  "engines": {
+    "node": "^14.15.4"
   }
-  
+}
