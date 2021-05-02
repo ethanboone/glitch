@@ -3,18 +3,18 @@
     <!-- <BugsComponent v-for="bug in state.bugs" :key="bug.id" :bugs="bug" /> -->
     <table class="table table-bordered border-success">
       <thead>
-        <tr>
+        <tr class="text">
           <th scope="col">
-            #
+            Title
           </th>
           <th scope="col">
-            First
+            Created By
           </th>
           <th scope="col">
-            Last
+            Closed
           </th>
           <th scope="col">
-            Handle
+            Last Updated
           </th>
         </tr>
       </thead>
@@ -59,6 +59,10 @@ export default {
 }
 
 table.table-bordered > thead > tr > th{
-  border:1px solid blue;
+  border:3px solid #008F11;
+}
+
+.text{
+    color: #008F11;
 }
 </style>

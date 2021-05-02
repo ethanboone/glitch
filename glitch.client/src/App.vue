@@ -3,7 +3,7 @@
     <Navbar />
   </header>
   <main>
-    <div class="container-fluid">
+    <div class="container-fluid bg-black py-4">
       <router-view />
     </div>
   </main>
@@ -31,5 +31,9 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
+
+.bg-black {
+  background-color: $black;
+}
 
 </style>

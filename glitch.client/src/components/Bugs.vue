@@ -1,10 +1,12 @@
 <template>
-  <tr>
-    <td>{{ bug.title }}</td>
-    <td>{{ bug.creator.name }}</td>
-    <td>{{ bug.closed }}</td>
-    <td>{{ bug.updatedAt }}</td>
-  </tr>
+  <router-link :to="{name: 'BugDetails', params: {id: bug.id}}">
+    <tr class="text">
+      <td>{{ bug.title }}</td>
+      <td>{{ bug.creator.name }}</td>
+      <td>{{ bug.closed }}</td>
+      <td>{{ bug.updatedAt }}</td>
+    </tr>
+  </router-link>
 </template>
 
 <script>
@@ -41,6 +43,15 @@ export default {
 
 <style scoped>
 tr > td{
-  border:1px solid blue;
+  border:2px solid #008F11;
 }
+
+.text{
+    color: #008F11;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
 </style>
