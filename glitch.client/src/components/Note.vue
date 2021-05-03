@@ -2,13 +2,13 @@
   <div class="row card bg-dark my-2" v-if="state.notes">
     <div class="col-7 text-light my-2">
       {{ note.creator.name }}
-      <img :src="note.creator.picture" height="35" alt="user image">
+      <img :src="note.creator.picture" height="35" alt="user icon">
     </div>
     <div class="col-3 text-light">
       {{ note.body }}
     </div>
     <div class="col-2">
-      <button class="btn text-danger">
+      <button class="btn text-danger" @click="deleteNote">
         X
       </button>
     </div>
@@ -20,6 +20,7 @@ import { bugsService } from '../services/BugsService'
 import { logger } from '../utils/Logger'
 import { reactive, computed } from 'vue'
 import { AppState } from '../AppState'
+import { notesService } from '../services/NotesService'
 
 export default {
   name: 'Note',
@@ -38,6 +39,13 @@ export default {
       async getAll() {
         try {
           await bugsService.getAll()
+        } catch (error) {
+          logger.error(error)
+        }
+      },
+      async deleteNote() {
+        try {
+          await notesService.deleteNote(props.note)
         } catch (error) {
           logger.error(error)
         }

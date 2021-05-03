@@ -9,12 +9,12 @@ class NotesService {
 
   async create(note) {
     await api.post('api/notes', note)
-    this.getAll(note.bug)
+    await this.getAll(note.bug)
   }
 
-  async delete(bug, id) {
-    api.delete(`api/notes/${id}`)
-    this.getAll(bug)
+  async deleteNote(note) {
+    await api.delete(`api/notes/${note.id}`)
+    await this.getAll(note.bug)
   }
 }
 

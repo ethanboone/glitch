@@ -56,7 +56,9 @@
           </div>
         </div>
       </div>
-      <Note v-for="note in state.notes" :key="note.id" :note="note" :bug="bug"></note>
+      <div v-if="state.notes[0]">
+        <Note v-for="note in state.notes" :key="note.id" :note="note" :bug="bug"></note>
+      </div>
     </div>
   </div>
 </template>
@@ -99,8 +101,8 @@ export default {
       },
       async create() {
         try {
-          await notesService.create(state.newNote)
           $('#note-modal').modal('hide')
+          await notesService.create(state.newNote)
         } catch (error) {
           logger.error(error)
         }

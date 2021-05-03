@@ -1,6 +1,32 @@
 <template>
   <div>
-    <!-- <BugsComponent v-for="bug in state.bugs" :key="bug.id" :bugs="bug" /> -->
+    <h2>Bugs</h2>
+    <button class="btn btn-outline-green text" data-toggle="modal" data-target="#bug-modal">
+      +
+    </button>
+    <div class="modal" id="bug-modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content bg-dark">
+          <div class="modal-header bg-dark">
+            <h5 class="modal-title text-light">
+              New Note
+            </h5>
+          </div>
+          <div class="modal-body bg-dark">
+            <form class="form-group" @submit.prevent="create">
+              <label>Note Message</label>
+              <input type="text" class="form-control" required>
+              <button type="button" class="btn btn-outline-danger text-danger" data-dismiss="modal">
+                Close
+              </button>
+              <button type="submit" class="btn btn-outline-primary text-primary">
+                Create
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <table class="table table-bordered border-success">
       <thead>
         <tr class="text">

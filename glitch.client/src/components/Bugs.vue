@@ -2,9 +2,9 @@
   <router-link :to="{name: 'BugDetails', params: {id: bug.id}}">
     <tr class="text">
       <td>{{ bug.title }}</td>
-      <td>{{ bug.creator.name }}</td>
+      <td><img :src="bug.creator.picture" height="35" alt="user icon"> {{ bug.creator.name }}</td>
       <td>{{ bug.closed }}</td>
-      <td>{{ bug.updatedAt }}</td>
+      <td>{{ bug.updatedAt.split('T')[0] }}</td>
     </tr>
   </router-link>
 </template>

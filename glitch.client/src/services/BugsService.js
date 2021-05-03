@@ -7,6 +7,7 @@ class BugsService {
     const res = await api.get('api/bugs')
     logger.log(res.data)
     AppState.bugs = res.data
+    // split date at T to get date
   }
 
   async getOne(id) {
