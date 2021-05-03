@@ -59,10 +59,10 @@ export default {
 }
 
 table.table-bordered > thead > tr > th{
-  border:3px solid #008F11;
+  border:3px solid #00ff00;
 }
 
 .text{
-    color: #008F11;
+    color: #00ff00;
 }
 </style>

@@ -12,6 +12,7 @@ class BugsService {
   async getOne(id) {
     const res = await api.get(`api/bugs/${id}`)
     logger.log(res.data)
+    AppState.bugDetails = res.data
   }
 }
 

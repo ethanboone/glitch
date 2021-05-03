@@ -4,13 +4,13 @@ import { BadRequest } from '../utils/Errors'
 class BugsService {
   async getAll(query = {}) {
     const bugs = await dbContext.Bug.find(query)
-      .populate('creator')
+      .populate('creator', 'name creator')
     return bugs
   }
 
   async getOne(id) {
     const bug = await dbContext.Bug.findOne({ _id: id })
-      .populate('creator')
+      .populate('creator', 'name creator')
     if (!bug) {
       throw new BadRequest('Invalid Id')
     }

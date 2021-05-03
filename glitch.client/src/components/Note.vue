@@ -1,12 +1,18 @@
 <template>
-  <router-link :to="{name: 'BugDetails', params: {id: bug.id}}">
-    <tr class="text">
-      <td>{{ bug.title }}</td>
-      <td>{{ bug.creator.name }}</td>
-      <td>{{ bug.closed }}</td>
-      <td>{{ bug.updatedAt }}</td>
-    </tr>
-  </router-link>
+  <div class="row card bg-dark my-2" v-if="state.notes">
+    <div class="col-7 text-light my-2">
+      {{ note.creator.name }}
+      <img :src="note.creator.picture" height="35" alt="user image">
+    </div>
+    <div class="col-3 text-light">
+      {{ note.body }}
+    </div>
+    <div class="col-2">
+      <button class="btn text-danger">
+        X
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -16,16 +22,16 @@ import { reactive, computed } from 'vue'
 import { AppState } from '../AppState'
 
 export default {
-  name: 'Bugs',
+  name: 'Note',
   props: {
-    bug: {
+    note: {
       type: Object,
       required: true
     }
   },
-  setup() {
+  setup(props) {
     const state = reactive({
-      bugs: computed(() => AppState.bugs)
+      notes: computed(() => AppState.notes)
     })
     return {
       state,
