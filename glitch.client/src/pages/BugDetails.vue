@@ -2,27 +2,45 @@
   <div class="row justify-content-center" v-if="state.bug">
     <!-- if modal doesn't work, could do if/else toggled with a button to edit title and description with form inputs
       text decoration line through for closed bugs -->
-    <div class="col-12">
-      <p class="text">
-        Title
+    <div class="col-10 d-flex justify-content-end">
+      <button class="btn btn-outline-green text" @click="edit" v-if="state.bug.creator.id === state.account.id">
+        Edit bug
+      </button>
+    </div>
+    <div class="col-12" v-if="state.edit === false">
+      <p class="text mb-0">
+        TITLE
       </p>
       <h2 class="text">
         {{ state.bug.title }}
       </h2>
-      <p class="text">
-        Reported By
-      </p>
-      <h3 class="text">
-        {{ state.bug.creator.name }}
-      </h3>
-      <p class="text">
-        Status
+      <div class="my-4">
+        <p class="text mb-0">
+          REPORTED BY
+        </p>
+        <h3 class="text">
+          {{ state.bug.creator.name }}
+        </h3>
+      </div>
+      <p class="text mb-0">
+        STATUS
       </p><h3 class="text">
         {{ state.bug.closed }}
       </h3>
     </div>
-    <div class="col-10 d-flex text-center card bg-dark my-4" v-if="state.bug.description">
-      <p class="text-light">
+    <div class="col-12" v-else>
+      <form class="form-group" @submit.prevent="editBug">
+        <label class="text">Bug Title</label>
+        <input type="text" class="form-control" v-model="state.editBug.title" required>
+        <label class="text">Bug Description</label>
+        <input type="text" class="form-control" v-model="state.editBug.description" required>
+        <button type="submit" class="btn btn-outline-green text">
+          Create
+        </button>
+      </form>
+    </div>
+    <div class="col-10 d-flex text-center card py-3 bg-dark my-4" v-if="state.bug.description">
+      <p class="text-light my-0 py-0">
         {{ state.bug.description }}
       </p>
     </div>
@@ -32,7 +50,7 @@
       </button>
     </div>
     <div class="col-10">
-      <div class="d-flex">
+      <div class="d-flex justify-content-center">
         <h2 class="text mx-3">
           Notes
         </h2>
@@ -48,7 +66,7 @@
         </button>
       </form>
     </div>
-    <div class="col-12" v-if="state.notes[0]">
+    <div class="col-8 my-2" v-if="state.notes[0]">
       <Note v-for="note in state.notes" :key="note.id" :note="note" :bug="bug"></note>
     </div>
   </div>
@@ -70,7 +88,10 @@ export default {
       bug: computed(() => AppState.bugDetails),
       notes: computed(() => AppState.notes),
       newNote: { bug: route.params.id },
-      toggle: false
+      toggle: false,
+      edit: false,
+      editBug: {},
+      account: computed(() => AppState.account)
     })
     onMounted(async() => {
       try {
@@ -103,6 +124,18 @@ export default {
           if (window.confirm('Are you sure you want to close this bug? This cannot be undone and the bug cannot be edited after it is closed.')) {
             await bugsService.close(route.params.id)
           }
+        } catch (error) {
+          logger.error(error)
+        }
+      },
+      edit() {
+        state.edit = !state.edit
+      },
+      async editBug() {
+        try {
+          state.editBug.closed = state.bug.closed
+          state.editBug.creator = state.account
+          await bugsService.edit(route.params.id, state.editBug)
         } catch (error) {
           logger.error(error)
         }

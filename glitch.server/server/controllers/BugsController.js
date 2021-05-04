@@ -2,7 +2,7 @@ import BaseController from '../utils/BaseController'
 import { bugsService } from '../services/BugsService'
 import { notesService } from '../services/NotesService'
 import { Auth0Provider } from '@bcwdev/auth0provider'
-// import { logger } from '../utils/Logger'
+import { logger } from '../utils/Logger'
 
 export class BugsController extends BaseController {
   constructor() {
@@ -48,6 +48,7 @@ export class BugsController extends BaseController {
 
   async edit(req, res, next) {
     try {
+      logger.log('controller')
       req.body.id = req.params.id
       const data = await bugsService.edit(req.body)
       return res.send(data)

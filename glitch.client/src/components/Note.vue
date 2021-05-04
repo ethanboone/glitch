@@ -1,8 +1,8 @@
 <template>
-  <div class="row card justify-content-center bg-dark my-2 flex-row" v-if="state.notes">
+  <div class="row card justify-content-center align-items-center bg-dark my-2 flex-row" v-if="state.notes">
     <div class="col-6 text-light my-2">
-      {{ note.creator.name }}
       <img :src="note.creator.picture" height="35" alt="user icon">
+      {{ note.creator.name }}
     </div>
     <div class="col-3 text-light">
       {{ note.body }}

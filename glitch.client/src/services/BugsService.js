@@ -25,6 +25,13 @@ class BugsService {
     await api.delete(`api/bugs/${id}`)
     await this.getOne(id)
   }
+
+  async edit(id, bug) {
+    logger.log(bug)
+    const res = await api.put(`api/bugs/${id}`, bug)
+    logger.log('after')
+    this.getOne(res.data.id)
+  }
 }
 
 export const bugsService = new BugsService()

@@ -2,7 +2,7 @@
   <tr class="text">
     <td>
       <router-link :to="{name: 'BugDetails', params: {id: bug.id}}">
-        <div class="text">
+        <div :class="{strike: bug.closed}" class="text">
           {{ bug.title }}
         </div>
       </router-link>
@@ -74,6 +74,10 @@ tr > td{
 
 a:hover{
     text-decoration: none;
+}
+
+.strike{
+    text-decoration: line-through;
 }
 
 </style>
