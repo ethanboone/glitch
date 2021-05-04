@@ -25,15 +25,10 @@
             Home
           </router-link>
         </li>
-        <li class="nav-item">
-          <router-link :to="{ name: 'About' }" class="nav-link">
-            About
-          </router-link>
-        </li>
       </ul>
       <span class="navbar-text">
         <button
-          class="btn btn-outline-primary text-uppercase"
+          class="btn btn-outline-green text-uppercase"
           @click="login"
           v-if="!user.isAuthenticated"
         >
@@ -58,11 +53,6 @@
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
-            <router-link :to="{ name: 'Account' }">
-              <div class="list-group-item list-group-item-action hoverable">
-                Account
-              </div>
-            </router-link>
             <div
               class="list-group-item list-group-item-action hoverable"
               @click="logout"
@@ -120,10 +110,15 @@ a:hover {
   text-transform: uppercase;
 }
 .nav-item .nav-link.router-link-exact-active{
-  color: var(--primary);
+  color: #00ff00;
 }
 
 .text{
+    color: #00ff00;
+}
+
+.btn-outline-green{
+    border-color: #00ff00;
     color: #00ff00;
 }
 </style>

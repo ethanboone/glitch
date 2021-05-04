@@ -8,8 +8,8 @@
     </div>
   </main>
   <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
+    <div class="bg-dark text-center p-4 text">
+      glitch
     </div>
   </footer>
 </template>
@@ -34,6 +34,10 @@ export default {
 
 .bg-black {
   background-color: $black;
+}
+
+.text{
+    color: #00ff00;
 }
 
 </style>

@@ -8,7 +8,7 @@
       {{ note.body }}
     </div>
     <div class="col-2">
-      <button class="btn text-danger" @click="deleteNote">
+      <button class="btn text-danger" @click="deleteNote" v-if="state.user.isAuthenticated && state.note.creator.id === state.account.id">
         X
       </button>
     </div>

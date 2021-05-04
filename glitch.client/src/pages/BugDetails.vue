@@ -3,7 +3,7 @@
     <!-- if modal doesn't work, could do if/else toggled with a button to edit title and description with form inputs
       text decoration line through for closed bugs -->
     <div class="col-10 d-flex justify-content-end">
-      <button class="btn btn-outline-green text" @click="edit" v-if="state.bug.creator.id === state.account.id">
+      <button class="btn btn-outline-green text" @click="edit" v-if="state.user.isAuthenticated && state.bug.creator.id === state.account.id && bug.closed === false">
         Edit bug
       </button>
     </div>
@@ -45,7 +45,7 @@
       </p>
     </div>
     <div class="col-6 text-center my-2" @click="close">
-      <button class="btn btn-outline-green text" v-if="state.bug.closed === false">
+      <button class="btn btn-outline-green text" v-if="state.user.isAuthenticated && state.bug.closed === false">
         Close Bug
       </button>
     </div>
@@ -54,14 +54,14 @@
         <h2 class="text mx-3">
           Notes
         </h2>
-        <button class="btn btn-outline-green text" data-toggle="modal" data-target="#note-modal" @click="state.toggle = !state.toggle">
+        <button class="btn btn-outline-green text" data-toggle="modal" data-target="#note-modal" @click="state.toggle = !state.toggle" v-if="state.user.isAuthenticated">
           +
         </button>
       </div>
       <form class="form-group" @submit.prevent="create" v-if="state.toggle">
         <label class="text">Note Message</label>
         <input type="text" class="form-control" v-model="state.newNote.body" required>
-        <button type="submit" class="btn btn-outline-green text">
+        <button type="submit" class="btn btn-outline-green text" v-if="state">
           Create
         </button>
       </form>
@@ -91,7 +91,8 @@ export default {
       toggle: false,
       edit: false,
       editBug: {},
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      user: computed(() => AppState.user)
     })
     onMounted(async() => {
       try {

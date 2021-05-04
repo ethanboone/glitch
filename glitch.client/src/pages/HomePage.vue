@@ -4,7 +4,7 @@
       <h2 class="text mx-4">
         Bugs
       </h2>
-      <button class="btn btn-outline-green text" data-toggle="modal" data-target="#bug-modal">
+      <button class="btn btn-outline-green text" data-toggle="modal" data-target="#bug-modal" v-if="state.user.isAuthenticated">
         +
       </button>
     </div>
@@ -62,6 +62,7 @@
       </tbody>
       <tbody v-else>
         <Bugs v-for="bug in state.bugs" :bug="bug" :key="bug.id" />
+        <!-- if state.user.isauthenticated, and if creator property is the person currently logged in -->
       </tbody>
     </table>
   </div>
@@ -72,7 +73,7 @@ import { reactive, onMounted, computed } from 'vue'
 import { AppState } from '../AppState'
 import { bugsService } from '../services/BugsService'
 import { logger } from '../utils/Logger'
-import { $ } from 'jquery'
+import $ from 'jquery'
 import { useRouter } from 'vue-router'
 
 export default {
@@ -81,6 +82,7 @@ export default {
     // for filter have two other computed properties with a boolean value, one with default results, one with only open bugs
     const router = useRouter()
     const state = reactive({
+      user: computed(() => AppState.user),
       bugs: computed(() => AppState.bugs),
       openBugs: computed(() => AppState.bugs.filter(b => b.closed === false)),
       newBug: {},
