@@ -1,6 +1,6 @@
 <template>
-  <div class="row card bg-dark my-2" v-if="state.notes">
-    <div class="col-7 text-light my-2">
+  <div class="row card justify-content-center bg-dark my-2 flex-row" v-if="state.notes">
+    <div class="col-6 text-light my-2">
       {{ note.creator.name }}
       <img :src="note.creator.picture" height="35" alt="user icon">
     </div>
@@ -45,7 +45,9 @@ export default {
       },
       async deleteNote() {
         try {
-          await notesService.deleteNote(props.note)
+          if (window.confirm('Are you sure you want to remove this note?')) {
+            await notesService.deleteNote(props.note)
+          }
         } catch (error) {
           logger.error(error)
         }

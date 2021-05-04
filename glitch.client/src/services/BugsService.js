@@ -1,7 +1,6 @@
 import { AppState } from '../AppState'
 import { api } from './AxiosService'
 import { logger } from '../utils/Logger'
-
 class BugsService {
   async getAll() {
     const res = await api.get('api/bugs')
@@ -14,6 +13,17 @@ class BugsService {
     const res = await api.get(`api/bugs/${id}`)
     logger.log(res.data)
     AppState.bugDetails = res.data
+  }
+
+  async create(bug) {
+    const res = await api.post('api/bugs', bug)
+    await this.getAll()
+    return res.data.id
+  }
+
+  async close(id) {
+    await api.delete(`api/bugs/${id}`)
+    await this.getOne(id)
   }
 }
 

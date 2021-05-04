@@ -1,12 +1,34 @@
 <template>
-  <router-link :to="{name: 'BugDetails', params: {id: bug.id}}">
-    <tr class="text">
-      <td>{{ bug.title }}</td>
-      <td><img :src="bug.creator.picture" height="35" alt="user icon"> {{ bug.creator.name }}</td>
-      <td>{{ bug.closed }}</td>
-      <td>{{ bug.updatedAt.split('T')[0] }}</td>
-    </tr>
-  </router-link>
+  <tr class="text">
+    <td>
+      <router-link :to="{name: 'BugDetails', params: {id: bug.id}}">
+        <div class="text">
+          {{ bug.title }}
+        </div>
+      </router-link>
+    </td>
+    <td>
+      <router-link :to="{name: 'BugDetails', params: {id: bug.id}}">
+        <div class="text">
+          <img :src="bug.creator.picture" height="35" alt="user icon"> {{ bug.creator.name }}
+        </div>
+      </router-link>
+    </td>
+    <td>
+      <router-link :to="{name: 'BugDetails', params: {id: bug.id}}">
+        <div class="text">
+          {{ bug.closed }}
+        </div>
+      </router-link>
+    </td>
+    <td>
+      <router-link :to="{name: 'BugDetails', params: {id: bug.id}}">
+        <div class="text">
+          {{ bug.updatedAt.split('T')[0] }}
+        </div>
+      </router-link>
+    </td>
+  </tr>
 </template>
 
 <script>

@@ -1,9 +1,20 @@
 <template>
   <div>
-    <h2>Bugs</h2>
-    <button class="btn btn-outline-green text" data-toggle="modal" data-target="#bug-modal">
-      +
-    </button>
+    <div class="d-flex my-3">
+      <h2 class="text mx-4">
+        Bugs
+      </h2>
+      <button class="btn btn-outline-green text" data-toggle="modal" data-target="#bug-modal">
+        +
+      </button>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-3">
+        <button class="btn btn-outline-green text my-2" @click="sort">
+          Open Bugs Only
+        </button>
+      </div>
+    </div>
     <div class="modal" id="bug-modal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content bg-dark">
@@ -14,8 +25,10 @@
           </div>
           <div class="modal-body bg-dark">
             <form class="form-group" @submit.prevent="create">
-              <label>Note Message</label>
-              <input type="text" class="form-control" required>
+              <label class="text-light">Name</label>
+              <input type="text" class="form-control" v-model="state.newBug.title" required>
+              <label class="text-light">Description</label>
+              <input type="text" class="form-control" v-model="state.newBug.description" required>
               <button type="button" class="btn btn-outline-danger text-danger" data-dismiss="modal">
                 Close
               </button>
@@ -44,7 +57,10 @@
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="state.sort">
+        <Bugs v-for="bug in state.openBugs" :bug="bug" :key="bug.id" />
+      </tbody>
+      <tbody v-else>
         <Bugs v-for="bug in state.bugs" :bug="bug" :key="bug.id" />
       </tbody>
     </table>
@@ -55,19 +71,39 @@
 import { reactive, onMounted, computed } from 'vue'
 import { AppState } from '../AppState'
 import { bugsService } from '../services/BugsService'
+import { logger } from '../utils/Logger'
+import { $ } from 'jquery'
+import { useRouter } from 'vue-router'
+
 export default {
   name: 'Home',
   setup() {
+    // for filter have two other computed properties with a boolean value, one with default results, one with only open bugs
+    const router = useRouter()
     const state = reactive({
-      bugs: computed(() => AppState.bugs)
-
+      bugs: computed(() => AppState.bugs),
+      openBugs: computed(() => AppState.bugs.filter(b => b.closed === false)),
+      newBug: {},
+      sort: false
     })
     onMounted(async() => {
       bugsService.getAll()
     })
     return {
       state,
-      draw() {
+      async create() {
+        try {
+          const res = await bugsService.create(state.newBug)
+          // router.push to route to details page
+          router.push({ name: 'BugDetails', params: { id: res } })
+          $('#bug-modal').modal('hide')
+        } catch (error) {
+          logger.error(error)
+        }
+      },
+      sort() {
+        state.sort = !state.sort
+        logger.log(state.sort)
       }
     }
   }
@@ -90,5 +126,9 @@ table.table-bordered > thead > tr > th{
 
 .text{
     color: #00ff00;
+}
+
+.btn-outline-green{
+    border-color: #00ff00;
 }
 </style>
