@@ -1,5 +1,10 @@
 <template>
   <div class="row justify-content-center" v-if="state.bug">
+    <div class="col-12 d-flex justify-content-end my-2" @click="close">
+      <button class="btn btn-outline-green text" v-if="state.user.isAuthenticated && state.bug.closed === false">
+        Close Bug
+      </button>
+    </div>
     <!-- if modal doesn't work, could do if/else toggled with a button to edit title and description with form inputs
       text decoration line through for closed bugs -->
     <div class="col-10 d-flex justify-content-end">
@@ -7,7 +12,7 @@
         Edit bug
       </button>
     </div>
-    <div class="col-12" v-if="state.edit === false">
+    <div class="col-12 mb-4" v-if="state.edit === false">
       <p class="text mb-0">
         TITLE
       </p>
@@ -25,7 +30,12 @@
       <p class="text mb-0">
         STATUS
       </p><h3 class="text">
-        {{ state.bug.closed }}
+        <div v-if="state.bug.closed == true">
+          Closed
+        </div>
+        <div v-else>
+          Open
+        </div>
       </h3>
     </div>
     <div class="col-12" v-else>
