@@ -7,7 +7,7 @@
     <div class="col-3 text-light">
       {{ note.body }}
     </div>
-    <div class="col-2">
+    <div class="col-2" v-if="state.account">
       <button class="btn text-danger" @click="deleteNote" v-if="state.user.isAuthenticated && state.note.creator.id === state.account.id">
         X
       </button>
