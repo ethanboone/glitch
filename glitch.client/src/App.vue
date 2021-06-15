@@ -1,17 +1,19 @@
 <template>
-  <header>
-    <Navbar />
-  </header>
-  <main>
-    <div class="container-fluid bg-black py-4">
-      <router-view />
-    </div>
-  </main>
-  <footer>
-    <div class="bg-dark text-center p-4 text">
-      glitch
-    </div>
-  </footer>
+  <div>
+    <header>
+      <Navbar />
+    </header>
+    <main>
+      <div class="container-fluid bg-black py-4">
+        <router-view />
+      </div>
+    </main>
+    <footer>
+      <div class="bg-dark text-center p-4 text">
+        glitch
+      </div>
+    </footer>
+  </div>
 </template>
 
 <script>
@@ -38,6 +40,7 @@ export default {
 
 .text{
     color: #00ff00;
+    font-family: 'IBM Plex Mono', monospace;
 }
 
 </style>
