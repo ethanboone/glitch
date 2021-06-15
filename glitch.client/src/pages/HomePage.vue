@@ -1,28 +1,21 @@
 <template>
   <div>
     <div class="d-flex row justify-content-between my-3">
-      <div class="col-5 col-md-3 d-flex">
-        <h2 class="text mb-0">
+      <div class="col-5 col-md-3 d-flex align-items-center">
+        <h2 class="text mb-0 py-0 d-flex align-items-center">
           Bugs
         </h2>
-        <div class="d-flex align-items-center">
+        <div class="d-flex">
           <button class="btn btn-outline-green text d-flex mx-3" data-toggle="modal" data-target="#bug-modal" v-if="state.user.isAuthenticated">
             +
           </button>
         </div>
       </div>
       <div class="col-5 col-md-3 d-flex justify-content-center">
-        <button class="btn btn-outline-green text my-2" @click="sort">
+        <button class="btn btn-outline-green text" @click="sort">
           Open Bugs Only
         </button>
       </div>
-    </div>
-    <div class="row justify-content-center">
-      <!-- <div class="col-3">
-        <button class="btn btn-outline-green text my-2" @click="sort">
-          Open Bugs Only
-        </button>
-      </div> -->
     </div>
     <div class="modal" id="bug-modal" tabindex="-1">
       <div class="modal-dialog">

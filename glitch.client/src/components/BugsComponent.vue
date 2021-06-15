@@ -1,7 +1,6 @@
 <template>
   <button class="btn btn-primary">
     Bugs
-    <!-- {{ state.bugs }} -->
   </button>
 </template>
 

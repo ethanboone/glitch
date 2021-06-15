@@ -5,8 +5,6 @@
         Close Bug
       </button>
     </div>
-    <!-- if modal doesn't work, could do if/else toggled with a button to edit title and description with form inputs
-      text decoration line through for closed bugs -->
     <div class="col-10 d-flex justify-content-end">
       <button class="btn btn-outline-green text" @click="edit" v-if="state.user.isAuthenticated && state.bug.creator.id === state.account.id && bug.closed === false">
         Edit bug
@@ -49,24 +47,21 @@
         </button>
       </form>
     </div>
-    <div class="col-10 d-flex text-center card py-3 bg-dark my-4" v-if="state.bug.description">
-      <p class="text-light my-0 py-0">
+    <div class="col-10 d-flex text-center card-outline py-3 my-4" v-if="state.bug.description">
+      <p class="text my-0 py-0">
         {{ state.bug.description }}
       </p>
     </div>
-    <div class="col-6 text-center my-2" @click="close">
-      <button class="btn btn-outline-green text" v-if="state.user.isAuthenticated && state.bug.closed === false">
-        Close Bug
-      </button>
-    </div>
     <div class="col-10">
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center align-items-center">
         <h2 class="text mx-3">
           Notes
         </h2>
-        <button class="btn btn-outline-green text" data-toggle="modal" data-target="#note-modal" @click="state.toggle = !state.toggle" v-if="state.user.isAuthenticated">
-          +
-        </button>
+        <div>
+          <button class="btn btn-outline-green text" data-toggle="modal" data-target="#note-modal" @click="state.toggle = !state.toggle" v-if="state.user.isAuthenticated">
+            +
+          </button>
+        </div>
       </div>
       <form class="form-group" @submit.prevent="create" v-if="state.toggle">
         <label class="text">Note Message</label>
@@ -163,5 +158,10 @@ export default {
 
 .btn-outline-green{
     border-color: #00ff00;
+}
+
+.card-outline {
+  border: 1px solid #00ff00;
+  border-radius: .25rem;
 }
 </style>
