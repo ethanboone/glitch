@@ -1,10 +1,10 @@
 <template>
-  <div class="row card justify-content-center align-items-center bg-dark my-2 flex-row" v-if="state.notes">
-    <div class="col-6 text-light my-2">
-      <img :src="note.creator.picture" height="35" alt="user icon">
+  <div class="row card-outline justify-content-center align-items-center my-2 flex-row" v-if="state.notes">
+    <div class="col-6 text my-2">
+      <img :src="note.creator.picture" height="35" alt="user icon" class="rounded-circle">
       {{ note.creator.name }}
     </div>
-    <div class="col-3 text-light">
+    <div class="col-3 text">
       {{ note.body }}
     </div>
     <div class="col-2" v-if="state.account">
@@ -68,6 +68,11 @@ tr > td{
 
 a:hover{
     text-decoration: none;
+}
+
+.card-outline {
+  border: 1px solid #00ff00;
+  border-radius: .25rem;
 }
 
 </style>

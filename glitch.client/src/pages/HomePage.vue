@@ -64,7 +64,6 @@
       </tbody>
       <tbody v-else>
         <Bugs v-for="bug in state.bugs" :bug="bug" :key="bug.id" />
-        <!-- if state.user.isauthenticated, and if creator property is the person currently logged in -->
       </tbody>
     </table>
   </div>
@@ -81,7 +80,6 @@ import { useRouter } from 'vue-router'
 export default {
   name: 'Home',
   setup() {
-    // for filter have two other computed properties with a boolean value, one with default results, one with only open bugs
     const router = useRouter()
     const state = reactive({
       user: computed(() => AppState.user),
