@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-bg">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <h1 class="text">
@@ -120,5 +120,10 @@ a:hover {
 .btn-outline-green{
     border-color: #00ff00;
     color: #00ff00;
+}
+
+.navbar-bg {
+  background-color: black;
+  border-bottom: 1px solid #00ff00;
 }
 </style>
