@@ -23,6 +23,7 @@
     </td>
     <td>
       <router-link :to="{name: 'BugDetails', params: {id: bug.id}}">
+        <!-- This splits the time string into an array at the character T, and the first index of the array is what is being displayed -->
         <div class="text">
           {{ bug.updatedAt.split('T')[0] }}
         </div>
