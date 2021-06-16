@@ -30,7 +30,6 @@ export class BugsController extends BaseController {
   async getOne(req, res, next) {
     try {
       const data = await bugsService.getOne(req.params.id)
-      // data  is returning what is given back from teh service
       return res.send(data)
     } catch (error) {
       next(error)
@@ -70,21 +69,10 @@ export class BugsController extends BaseController {
 
   async getAllNotes(req, res, next) {
     try {
-      // in the request in client side, in the parameters the id sent must be the bug id
       const data = await notesService.getAllNotes(req.params.id)
       return res.send(data)
     } catch (error) {
       next(error)
     }
   }
-
-  // async getOneNote(req, res, next) {
-  //   try {
-  //     const data = await notesService.getOneNote(req.query)
-  //     // data  is returning what is given back from the service
-  //     return res.send(data)
-  //   } catch (error) {
-  //     next(error)
-  //   }
-  // }
 }

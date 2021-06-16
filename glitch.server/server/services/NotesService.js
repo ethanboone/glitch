@@ -9,14 +9,6 @@ class NotesService {
     return notes
   }
 
-  //   async getOneNote(id) {
-  //     const note = await dbContext.Note.findOne({ _id: id })
-  //     if (!note) {
-  //       throw new BadRequest('Invalid Id')
-  //     }
-  //     return note
-  //   }
-
   async delete(id) {
     const data = await dbContext.Note.findByIdAndDelete(id)
     if (!data) {

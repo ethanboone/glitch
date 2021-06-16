@@ -27,7 +27,6 @@ class BugsService {
   }
 
   async edit(body) {
-    // what does this param say?
     // first argument is properties to find in database, second is what is being updated, ensures that the updated object is being sent back
 
     const data = await dbContext.Bug.findOneAndUpdate({ _id: body.id, closed: false }, { description: body.description, title: body.title }, { new: true })

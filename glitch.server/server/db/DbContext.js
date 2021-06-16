@@ -7,6 +7,7 @@ class DbContext {
   Bug = mongoose.model('Bug', BugSchema);
 
   Note = mongoose.model('Note', NoteSchema);
+
   Account = mongoose.model('Account', AccountSchema);
 }
 
