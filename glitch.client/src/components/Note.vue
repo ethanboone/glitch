@@ -7,6 +7,8 @@
     <div class="col-3 text">
       {{ note.body }}
     </div>
+    <!-- The account in the appstate must be assigned a value, and the user has to be authenticated
+    from Auth0 and they have to be the creator of the note for the delete button to be rendered. -->
     <div class="col-2" v-if="state.account">
       <button class="btn text-danger" @click="deleteNote" v-if="state.user.isAuthenticated && state.note.creator.id === state.account.id">
         X
