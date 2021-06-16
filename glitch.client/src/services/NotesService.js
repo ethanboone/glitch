@@ -13,7 +13,6 @@ class NotesService {
   }
 
   async deleteNote(note) {
-    // How do you return based on confirm selection?
     await api.delete(`api/notes/${note.id}`)
     await this.getAll(note.bug)
   }

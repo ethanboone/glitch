@@ -59,6 +59,8 @@
           </th>
         </tr>
       </thead>
+      <!-- these are two separate loops. One is for if the user wants to see bugs that aren't closed,
+      and the other is for all bugs including the closed ones -->
       <tbody v-if="state.sort">
         <Bugs v-for="bug in state.openBugs" :bug="bug" :key="bug.id" />
       </tbody>
